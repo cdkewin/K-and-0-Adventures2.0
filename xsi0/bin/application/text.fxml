@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+   <right>
+      <AnchorPane prefHeight="660.0" prefWidth="608.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="665.0" fitWidth="608.0">
+               <image>
+                  <Image url="@../../../../Desktop/MainTitle.jpg" />
+               </image>
+            </ImageView>
+            <Button id="player1Button" layoutX="167.0" layoutY="424.0" mnemonicParsing="false" onAction="#switchToScenePlayerOne" prefHeight="98.0" prefWidth="88.0" textFill="#170d0d" />
+            <Button id="player2Button" layoutX="343.0" layoutY="420.0" mnemonicParsing="false" onAction="#switchToScenePlayerTwo" prefHeight="98.0" prefWidth="87.0" textFill="TRANSPARENT" />
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>
