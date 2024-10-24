@@ -2,7 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.io.InputStream;
-
+import java.util.Random;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +18,7 @@ import javafx.scene.Node;
 
 public class SceneController {
 
-	private static final ActionEvent ActionEvent = null;
+
 	@FXML
 	
 	private Stage stage;
@@ -34,7 +34,9 @@ public class SceneController {
 
 	
 	static int counter = 0;
-	
+	static int decider = 0;
+
+	//if it stays 0, the 2 player mode is initiated, if it turns to 1, the randomizer is activated
 	
 	
 	public int[][] matrix = {
@@ -104,7 +106,9 @@ public void turns() {
 	}
 	
 	public void switchToScenePlayerOne(ActionEvent event) throws IOException {
-	
+
+	    decider = 1;
+
         Parent root = FXMLLoader.load(getClass().getResource("player1Scene.fxml"));
         
         System.out.println("Initiated 1 player mode successfully! ");
@@ -121,6 +125,7 @@ public void turns() {
 	
 	}
 	public void switchToScenePlayerTwo(ActionEvent event) throws IOException {
+		decider = 0;
 	    FXMLLoader loader = new FXMLLoader(getClass().getResource("player2scne.fxml"));
 	    Parent root = loader.load();
 	    
@@ -206,25 +211,30 @@ public void turns() {
 	        this.gridPane.add(imageView, x, y); 
 	    }
 
-	 
-	 
-	 
-	 
-	 
-	 
 
 	public void playingButton11(ActionEvent event) throws IOException {
+
+        Random random = new Random();
+		int xx = random.nextInt(3);
+		int yy = random.nextInt(3);
+
 		if(this.matrix[0][0] == 0) {
 			if(counter % 2 == 0) {
 				
 			    this.matrix[0][0] = 1;
-			    
+				if(decider == 1){
+					this.matrix[xx][yy] = 2;
+				}
+
 			    } else
 			    {
 			    	this.matrix[0][0] = 2;
+					if(decider == 1){
+						this.matrix[xx][yy] = 1;
+					}
+
 			    }
-		
-		
+
 	    if (check()) {
 	    	
 	    	if(counter % 2 == 0) {
@@ -240,8 +250,23 @@ public void turns() {
 	    
 	    if (counter % 2 == 0) {
 	        addImageToGrid("kimage.png", 0, 0);
+			if(decider ==1){
+
+				if(this.matrix[xx][yy] == 0){
+					addImageToGrid("zeroimage.png", xx, yy);
+				}else
+					addImageToGrid("zeroimage.png", random.nextInt(3), random.nextInt(3));
+
+			}
 	    } else {
 	        addImageToGrid("zeroimage.png", 0, 0);
+			if(decider ==1){
+
+				if(this.matrix[xx][yy] == 0){
+					addImageToGrid("kimage.png", xx, yy);
+				}else
+					addImageToGrid("kimage.png", random.nextInt(3), random.nextInt(3));
+			}
 	    }
 	    counter++;
 	    System.out.println("Button initiated successfully!");
@@ -252,20 +277,30 @@ public void turns() {
 	 
 	}
 
-	
-	
-	
-	
-	
+
 	public void playingButton12(ActionEvent event) throws IOException {
+
+		Random random = new Random();
+		int xx = random.nextInt(3);
+		int yy = random.nextInt(3);
+
+
 		if(this.matrix[0][1] == 0) {
 			if(counter % 2 == 0) {
 				
 			    this.matrix[0][1] = 1;
+
+				if(decider == 1){
+					this.matrix[xx][yy] = 2;
+				}
 			    
 			    } else
 			    {
 			    	this.matrix[0][1] = 2;
+					if(decider == 1){
+						this.matrix[xx][yy] = 1;
+					}
+
 			    }
 		
 	    if (check()) {
@@ -283,8 +318,22 @@ public void turns() {
 
 	    if (counter % 2 == 0) {
 	        addImageToGrid("kimage.png", 1, 0);
+			if(decider ==1){
+
+				if(this.matrix[xx][yy] == 0){
+					addImageToGrid("zeroimage.png", xx, yy);
+				}else
+					addImageToGrid("zeroimage.png", random.nextInt(3), random.nextInt(3));
+			}
 	    } else {
 	        addImageToGrid("zeroimage.png", 1, 0);
+			if(decider ==1){
+
+				if(this.matrix[xx][yy] == 0){
+					addImageToGrid("kimage.png", xx, yy);
+				}else
+					addImageToGrid("kimage.png", random.nextInt(3), random.nextInt(3));
+			}
 	    }
 	    counter++;
 	    
@@ -299,14 +348,24 @@ public void turns() {
 
 
 	public void playingButton13(ActionEvent event) throws IOException {
+		Random random = new Random();
+		int xx = random.nextInt(3);
+		int yy = random.nextInt(3);
+
 		if(this.matrix[0][2] == 0) {
 			if(counter % 2 == 0) {
 				
 			    this.matrix[0][2] = 1;
+				if(decider == 1){
+					this.matrix[xx][yy] = 2;
+				}
 			    
 			    } else
 			    {
 			    	this.matrix[0][2] = 2;
+					if(decider == 1){
+						this.matrix[xx][yy] = 1;
+					}
 			    }
 		
 	    if (check()) {
@@ -324,8 +383,22 @@ public void turns() {
 	    
 	    if (counter % 2 == 0) {
 	        addImageToGrid("kimage.png", 2, 0);
+			if(decider ==1){
+
+				if(this.matrix[xx][yy] == 0){
+					addImageToGrid("zeroimage.png", xx, yy);
+				}else
+					addImageToGrid("zeroimage.png", random.nextInt(3), random.nextInt(3));
+			}
 	    } else {
 	        addImageToGrid("zeroimage.png", 2, 0);
+			if(decider ==1){
+
+				if(this.matrix[xx][yy] == 0){
+					addImageToGrid("kimage.png", xx, yy);
+				}else
+					addImageToGrid("kimage.png", random.nextInt(3), random.nextInt(3));
+			}
 	    }
 	    counter++;
 
@@ -340,14 +413,24 @@ public void turns() {
 
 	
 	public void playingButton21(ActionEvent event) throws IOException {
+
+		Random random = new Random();
+		int xx = random.nextInt(3);
+		int yy = random.nextInt(3);
+
 		if(this.matrix[1][0] == 0) {
 			if(counter % 2 == 0) {
 				
 			    this.matrix[1][0] = 1;
-			    
+				if(decider == 1){
+					this.matrix[xx][yy] = 2;
+				}
 			    } else
 			    {
 			    	this.matrix[1][0] = 2;
+					if(decider == 1){
+						this.matrix[xx][yy] = 1;
+					}
 			    }
 		
 	    if (check()) {
@@ -364,8 +447,22 @@ public void turns() {
 	    
 	    if (counter % 2 == 0) {
 	        addImageToGrid("kimage.png", 0, 1);
+			if(decider ==1){
+
+				if(this.matrix[xx][yy] == 0){
+					addImageToGrid("zeroimage.png", xx, yy);
+				}else
+					addImageToGrid("zeroimage.png", random.nextInt(3), random.nextInt(3));
+			}
 	    } else {
 	        addImageToGrid("zeroimage.png", 0, 1);
+			if(decider ==1){
+
+				if(this.matrix[xx][yy] == 0){
+					addImageToGrid("kimage.png", xx, yy);
+				}else
+					addImageToGrid("kimage.png", random.nextInt(3), random.nextInt(3));
+			}
 	    }
 	    counter++;
 	    
@@ -382,14 +479,24 @@ public void turns() {
 
 
 	public void playingButton22(ActionEvent event) throws IOException {
+		Random random = new Random();
+		int xx = random.nextInt(3);
+		int yy = random.nextInt(3);
+
 		if(this.matrix[1][1] == 0) {
 			if(counter % 2 == 0) {
 				
 			    this.matrix[1][1] = 1;
+				if(decider == 1){
+					this.matrix[xx][yy] = 2;
+				}
 			    
 			    } else
 			    {
 			    	this.matrix[1][1] = 2;
+					if(decider == 1){
+						this.matrix[xx][yy] = 1;
+					}
 			    }
 		
 	    if (check()) {
@@ -405,8 +512,22 @@ public void turns() {
 	    }
 	    if (counter % 2 == 0) {
 	        addImageToGrid("kimage.png", 1, 1);
+			if(decider ==1){
+
+				if(this.matrix[xx][yy] == 0){
+					addImageToGrid("zeroimage.png", xx, yy);
+				}else
+					addImageToGrid("zeroimage.png", random.nextInt(3), random.nextInt(3));
+			}
 	    } else {
 	        addImageToGrid("zeroimage.png", 1, 1);
+			if(decider ==1){
+
+				if(this.matrix[xx][yy] == 0){
+					addImageToGrid("kimage.png", xx, yy);
+				}else
+					addImageToGrid("kimage.png", random.nextInt(3), random.nextInt(3));
+			}
 	    }
 	    counter++;
 	    System.out.println("Button initiated successfully!");
@@ -427,14 +548,23 @@ public void turns() {
 	
 	
 	public void playingButton23(ActionEvent event) throws IOException {
+		Random random = new Random();
+		int xx = random.nextInt(3);
+		int yy = random.nextInt(3);
 		if(this.matrix[1][2] == 0) {
 			if(counter % 2 == 0) {
 				
 			    this.matrix[1][2] = 1;
+				if(decider == 1){
+					this.matrix[xx][yy] = 2;
+				}
 			    
 			    } else
 			    {
 			    	this.matrix[1][2] = 2;
+					if(decider == 1){
+						this.matrix[xx][yy] = 1;
+					}
 			    }
 		
 		
@@ -454,8 +584,22 @@ public void turns() {
 	    
 	    if (counter % 2 == 0) {
 	        addImageToGrid("kimage.png", 2, 1);
+			if(decider ==1){
+
+				if(this.matrix[xx][yy] == 0){
+					addImageToGrid("zeroimage.png", xx, yy);
+				}else
+					addImageToGrid("zeroimage.png", random.nextInt(3), random.nextInt(3));
+			}
 	    } else {
 	        addImageToGrid("zeroimage.png", 2, 1);
+			if(decider ==1){
+
+				if(this.matrix[xx][yy] == 0){
+					addImageToGrid("kimage.png", xx, yy);
+				}else
+					addImageToGrid("kimage.png", random.nextInt(3), random.nextInt(3));
+			}
 	    }
 	    counter++;
 	    
@@ -476,14 +620,23 @@ public void turns() {
 	
 	
 	public void playingButton31(ActionEvent event) throws IOException {
+		Random random = new Random();
+		int xx = random.nextInt(3);
+		int yy = random.nextInt(3);
 		if(this.matrix[2][0] == 0) {
 			if(counter % 2 == 0) {
 				
 			    this.matrix[2][0] = 1;
+				if(decider == 1){
+					this.matrix[xx][yy] = 2;
+				}
 			    
 			    } else
 			    {
 			    	this.matrix[2][0] = 2;
+					if(decider == 1){
+						this.matrix[xx][yy] = 1;
+					}
 			    }
 		
 	    if (check()) {
@@ -500,8 +653,22 @@ public void turns() {
 	    
 	    if (counter % 2 == 0) {
 	        addImageToGrid("kimage.png", 0, 2);
+			if(decider ==1){
+
+				if(this.matrix[xx][yy] == 0){
+					addImageToGrid("zeroimage.png", xx, yy);
+				}else
+					addImageToGrid("zeroimage.png", random.nextInt(3), random.nextInt(3));
+			}
 	    } else {
 	        addImageToGrid("zeroimage.png", 0, 2);
+			if(decider ==1){
+
+				if(this.matrix[xx][yy] == 0){
+					addImageToGrid("kimage.png", xx, yy);
+				}else
+					addImageToGrid("kimage.png", random.nextInt(3), random.nextInt(3));
+			}
 	    }
 	    counter++;
 	    
@@ -518,14 +685,23 @@ public void turns() {
 
 
 	public void playingButton32(ActionEvent event) throws IOException {
+		Random random = new Random();
+		int xx = random.nextInt(3);
+		int yy = random.nextInt(3);
 		if(this.matrix[2][1] == 0) {
 			if(counter % 2 == 0) {
 				
 			    this.matrix[2][1] = 1;
+				if(decider == 1){
+					this.matrix[xx][yy] = 2;
+				}
 			    
 			    } else
 			    {
 			    	this.matrix[2][1] = 2;
+					if(decider == 1){
+						this.matrix[xx][yy] = 1;
+					}
 			    }
 		
 	    if (check()) {
@@ -542,8 +718,22 @@ public void turns() {
 	    
 	    if (counter % 2 == 0) {
 	        addImageToGrid("kimage.png", 1, 2);
+			if(decider ==1){
+
+				if(this.matrix[xx][yy] == 0){
+					addImageToGrid("zeroimage.png", xx, yy);
+				}else
+					addImageToGrid("zeroimage.png", random.nextInt(3), random.nextInt(3));
+			}
 	    } else {
 	        addImageToGrid("zeroimage.png", 1, 2);
+			if(decider ==1){
+
+				if(this.matrix[xx][yy] == 0){
+					addImageToGrid("kimage.png", xx, yy);
+				}else
+					addImageToGrid("kimage.png", random.nextInt(3), random.nextInt(3));
+			}
 	    }
 	    counter++;
 	    
@@ -563,14 +753,23 @@ public void turns() {
 	
 	
 	public void playingButton33(ActionEvent event) throws IOException {
+		Random random = new Random();
+		int xx = random.nextInt(3);
+		int yy = random.nextInt(3);
 		if(this.matrix[2][2] == 0) {
 			if(counter % 2 == 0) {
 				
 			    this.matrix[2][2] = 1;
+				if(decider == 1){
+					this.matrix[xx][yy] = 2;
+				}
 			    
 			    } else
 			    {
 			    	this.matrix[2][2] = 2;
+					if(decider == 1){
+						this.matrix[xx][yy] = 1;
+					}
 			    }
 		
 		
@@ -588,8 +787,22 @@ public void turns() {
 
 		 if (counter % 2 == 0) {
 		        addImageToGrid("kimage.png", 2, 2);
+			 if(decider ==1){
+
+				 if(this.matrix[xx][yy] == 0){
+					 addImageToGrid("zeroimage.png", xx, yy);
+				 }else
+					 addImageToGrid("zeroimage.png", random.nextInt(3), random.nextInt(3));
+			 }
 		    } else {
 		        addImageToGrid("zeroimage.png", 2, 2);
+			 if(decider ==1){
+
+				 if(this.matrix[xx][yy] == 0){
+					 addImageToGrid("kimage.png", xx, yy);
+				 }else
+					 addImageToGrid("kimage.png", random.nextInt(3), random.nextInt(3));
+			 }
 		    }
 		    counter++;
 
